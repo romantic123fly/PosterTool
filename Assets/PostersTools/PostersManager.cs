@@ -68,6 +68,17 @@ public class PostersManager : MonoBehaviour
         {
             UnityEngine.Application.Quit();
         }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            foreach (var item in outpatientInfoList)
+            {
+              string path =  Application.streamingAssetsPath + "/门诊信息/" + item.name + "/海报";
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path,true);
+                }
+            }
+        }
     }
     public IEnumerator LoadCfg(string cfgPath)
     {
@@ -83,9 +94,15 @@ public class PostersManager : MonoBehaviour
             OutpatientInfo opinfo = new OutpatientInfo();
             opinfo.id = i + "";
             opinfo.name = cfgData["Name"][i + ""];
-            opinfo.phoneNum = cfgData["PhoneNum"][i + ""];
+  
+            opinfo.phoneNum = cfgData["PhoneNum"][i + ""] == ""?"": cfgData["PhoneNum"][i + ""];
             opinfo.address = cfgData["Address"][i + ""];
-            opinfo.content = cfgData["Content"][i + ""];
+            opinfo.content = cfgData["Content"][i + ""] == "" ? "" : cfgData["Content"][i + ""];
+
+            var size = cfgData["LogoSize"][i + ""].Replace('"',' ').Split(',');
+            opinfo.logoSize = new Vector2(float.Parse(size[0]),float.Parse(size[1]));
+            var pos = cfgData["LogoPos"][i + ""].Replace('"', ' ').Split(',');
+            opinfo.logoPos = new Vector2(float.Parse(pos[0]), float.Parse(pos[1]));
             outpatientInfoList.Add(opinfo);
         }
     }

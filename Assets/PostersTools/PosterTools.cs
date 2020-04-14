@@ -83,7 +83,7 @@ public class PosterTools : MonoBehaviour
             Debug.Log(www.error);
         }
     }
-    private void SetImage(string path,Image image)
+    private void SetImage(string path,Image image,float x= 160,float y= -110, float i_width =250,float i_higth =150)
     {
         DirectoryInfo root = new DirectoryInfo(path);
         if (root.GetFiles().Length > 0)
@@ -98,6 +98,7 @@ public class PosterTools : MonoBehaviour
         {
             Debug.Log(path);
             Debug.LogError(path.Split('/')[path.Split('/').Length-3] + "--" + path.Split('/')[path.Split('/').Length-2] + "-未设置");
+            image.sprite = null;
             return;
         }
         FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -118,7 +119,12 @@ public class PosterTools : MonoBehaviour
         float a = img.width / (float)img.height;
         Debug.Log(a+" "+ img.width +" "+ img.height);
         image.sprite = sprite;
-        image.rectTransform.sizeDelta = new Vector2(image.rectTransform.sizeDelta.y*a, image.rectTransform.sizeDelta.y);
+        if (image.gameObject.name == "Logo")
+        {
+            image.rectTransform.anchoredPosition = new Vector2(x,y);
+            image.rectTransform.sizeDelta = new Vector2(i_width,i_higth);
+            //image.rectTransform.sizeDelta = new Vector2(image.rectTransform.sizeDelta.y * a, image.rectTransform.sizeDelta.y);
+        }
     }
     //生成海报
     IEnumerator CreatePosters() {
@@ -126,15 +132,14 @@ public class PosterTools : MonoBehaviour
         {
             string logoPath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/Logo/";
             string QrCodePath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/二维码/";
-            SetImage(logoPath, logo);
+            SetImage(logoPath, logo, item.logoPos.x, item.logoPos.y,item.logoSize.x,item.logoSize.y);
             SetImage(QrCodePath, qRCode);
             address.text = item.address.Replace('|', '\n');
 
-            phoneNum.text = "联系方式： " + item.phoneNum.Replace('|', '\n');
+            phoneNum.text = item.phoneNum==""?"": "联系方式:" + item.phoneNum.Replace('|', '\n');
 
             if (contentInput.text != "")
             {
-
                 content.text = contentInput.text.Replace('|', '\n');
             }
             else

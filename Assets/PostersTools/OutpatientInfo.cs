@@ -17,4 +17,6 @@ public class OutpatientInfo {
     public  string phoneNum;
     public  string address;
     public  string content;
+    public Vector2 logoSize;
+    public  Vector2 logoPos;
 }

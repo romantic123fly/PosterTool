@@ -7,10 +7,6 @@
 // QQ:                    853394528 
 // **********************************************************************
 #endregion
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 
