@@ -17,6 +17,7 @@ public class SetFestivalView : MonoBehaviour
 {
     public  Dropdown dp;
     public GameObject MainView;
+    public InputField index;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class SetFestivalView : MonoBehaviour
             PostersManager.GetInstance().CreateInfoPath();
             gameObject.SetActive(false);
             MainView.SetActive(true);
+            PostersManager.GetInstance().index =int.Parse(index.text);
         });
     }
 }

@@ -50,6 +50,7 @@ public class PostersManager : MonoBehaviour
         }
 
     }
+    public int index =1;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,7 @@ public class PostersManager : MonoBehaviour
                 if (Directory.Exists(path))
                 {
                     Directory.Delete(path,true);
+                    Debug.Log("清除海报");
                 }
             }
         }

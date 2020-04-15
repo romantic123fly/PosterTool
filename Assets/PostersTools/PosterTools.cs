@@ -85,6 +85,7 @@ public class PosterTools : MonoBehaviour
     }
     private void SetImage(string path,Image image,float x= 160,float y= -110, float i_width =250,float i_higth =150)
     {
+        image.color = new Color(1, 1, 1, 1); ;
         DirectoryInfo root = new DirectoryInfo(path);
         if (root.GetFiles().Length > 0)
         {
@@ -98,7 +99,7 @@ public class PosterTools : MonoBehaviour
         {
             Debug.Log(path);
             Debug.LogError(path.Split('/')[path.Split('/').Length-3] + "--" + path.Split('/')[path.Split('/').Length-2] + "-未设置");
-            image.sprite = null;
+            image.color = new Color(1,1,1,0); ;
             return;
         }
         FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -116,8 +117,6 @@ public class PosterTools : MonoBehaviour
         //创建Sprite
         Sprite sprite = Sprite.Create(img, new Rect(0, 0, img.width, img.height), new Vector2(0.5f, 0.5f));
 
-        float a = img.width / (float)img.height;
-        Debug.Log(a+" "+ img.width +" "+ img.height);
         image.sprite = sprite;
         if (image.gameObject.name == "Logo")
         {
@@ -163,8 +162,7 @@ public class PosterTools : MonoBehaviour
 
         operationView.gameObject.SetActive(false);
  
-        string pathSave = PostersManager.GetInstance().GetPosterPath(outpatientName)+"/1.png";
-      
+        string pathSave = PostersManager.GetInstance().GetPosterPath(outpatientName)+"/"+PostersManager.GetInstance().index+".png";
         StartCoroutine(SaveImage(pathSave));
     }
 
@@ -174,7 +172,7 @@ public class PosterTools : MonoBehaviour
         ScreenCapture.CaptureScreenshot(path, 5);
         yield return new WaitUntil(() => true);
         //yield return new WaitForSeconds(1);
-        Debug.Log(path.Split('/')[5]+"--海报生成成功！！");
+        Debug.Log(path.Split('/')[6]+"--海报生成成功！！");
     }
 
 
