@@ -21,6 +21,7 @@ public class SetFestivalView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        index.text = "0";
         dp.onValueChanged.AddListener((a)=> {
             PostersManager.GetInstance().theCurrentFestival = dp.options[a].text;
             PostersManager.GetInstance().CreateInfoPath();

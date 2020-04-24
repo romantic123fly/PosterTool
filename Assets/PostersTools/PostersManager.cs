@@ -109,18 +109,23 @@ public class PostersManager : MonoBehaviour
         }
     }
 
-    public  void CreateInfoPath()
+    public void CreateInfoPath()
     {
         string infoPath = Application.streamingAssetsPath + "/门诊信息";
-        if (!Directory.Exists(infoPath)) Directory.CreateDirectory(infoPath);
+
         //生成门诊存储路径
         foreach (var item in outpatientInfoList)
         {
             string namePath = infoPath + "/" + item.name;
-            if (!Directory.Exists(namePath)) Directory.CreateDirectory(namePath);
-            Directory.CreateDirectory(namePath + "/Logo");
-            Directory.CreateDirectory(namePath + "/二维码");
-            Directory.CreateDirectory(namePath  + "/海报" + "/" + theCurrentFestival);
+            if (!Directory.Exists(namePath))
+            {
+                Debug.Log("新加门诊文件路径："+ namePath);
+                Directory.CreateDirectory(namePath);
+                Directory.CreateDirectory(namePath + "/Logo");
+                Directory.CreateDirectory(namePath + "/二维码");
+                Directory.CreateDirectory(namePath + "/海报" + "/" + theCurrentFestival);
+           
+            }
         }
     }
 
