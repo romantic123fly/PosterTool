@@ -121,10 +121,18 @@ public class PostersManager : MonoBehaviour
             {
                 Debug.Log("新加门诊文件路径："+ namePath);
                 Directory.CreateDirectory(namePath);
+            }
+            if (!Directory.Exists(namePath + "/Logo"))
+            {
                 Directory.CreateDirectory(namePath + "/Logo");
+            }
+            if (!Directory.Exists(namePath + "/二维码"))
+            {
                 Directory.CreateDirectory(namePath + "/二维码");
+            }
+            if (!Directory.Exists(namePath + "/海报" + "/" + theCurrentFestival))
+            {
                 Directory.CreateDirectory(namePath + "/海报" + "/" + theCurrentFestival);
-           
             }
         }
     }
