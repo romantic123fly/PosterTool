@@ -143,6 +143,7 @@ public class PosterTools : MonoBehaviour
             }
             else
             {
+
                 content.text = item.content.Replace('|', '\n');
             }
 
