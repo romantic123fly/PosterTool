@@ -19,6 +19,7 @@ public class DragUI : MonoBehaviour, IDragHandler
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.gameObject.GetComponent<RectTransform>(), eventData.position, Camera.main, out position))
         {
 			
+			
             return;
         }
         transform.localPosition = position;
