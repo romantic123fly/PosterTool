@@ -21,7 +21,7 @@ public class PosterTools : MonoBehaviour
     public Image mainBg;
     public Image logo;
     public Image qRCode;
-    public Text phoneNum;
+    //public Text phoneNum;
     public Text address;
     public Text content;
     public InputField contentInput;
@@ -30,6 +30,8 @@ public class PosterTools : MonoBehaviour
     public Button screenShot;
     public GameObject operationView; 
     public GameObject colorPicker; 
+    public GameObject SetFestival;
+
 
     private Texture2D img = null;
     private Sprite sprite;
@@ -133,20 +135,13 @@ public class PosterTools : MonoBehaviour
             string QrCodePath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/二维码/";
             SetImage(logoPath, logo, item.logoPos.x, item.logoPos.y,item.logoSize.x,item.logoSize.y);
             SetImage(QrCodePath, qRCode);
-            address.text = item.address.Replace('|', '\n');
+            address.text = ( item.phoneNum+"|"+item.address).Replace('|', '\n');
+            //phoneNum.text = item.phoneNum==""?"": ;
 
-            phoneNum.text = item.phoneNum==""?"": "联系方式:" + item.phoneNum.Replace('|', '\n');
-
-            if (contentInput.text != "")
+            if (PostersManager.GetInstance().theCurrentFestival =="营销海报")
             {
-                content.text = contentInput.text.Replace('|', '\n');
-            }
-            else
-            {
-
                 content.text = item.content.Replace('|', '\n');
             }
-
             ScreenShot(item.name);
             yield return new WaitUntil(() => true);
         }
@@ -182,6 +177,11 @@ public class PosterTools : MonoBehaviour
         if (contentInput.text != "")
         {
             content.text = contentInput.text.Replace('|', '\n');
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetFestival.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -35,8 +35,8 @@ public class PostersManager : MonoBehaviour
         set
         {
             textColor = value;
-            mainBg.GetComponent<PosterTools>().address.color = textColor;
-            mainBg.GetComponent<PosterTools>().phoneNum.color = textColor;
+            mainBg.address.color = textColor;
+            //mainBg.phoneNum.color = textColor;
         }
     }
 
@@ -46,7 +46,7 @@ public class PostersManager : MonoBehaviour
         {
             textSize = value;
             mainBg.GetComponent<PosterTools>().address.fontSize = textSize;
-            mainBg.GetComponent<PosterTools>().phoneNum.fontSize = textSize;
+            //mainBg.GetComponent<PosterTools>().phoneNum.fontSize = textSize;
         }
 
     }
@@ -140,6 +140,14 @@ public class PostersManager : MonoBehaviour
     public string GetPosterPath(string outpatientName)
     {
         return Application.streamingAssetsPath + "/门诊信息/" + outpatientName  + "/海报" + "/" + theCurrentFestival;
+    }
+
+    public void SetLayout(int a)
+    {
+        TextAnchor textAnchor = a == 0 ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter;
+        mainBg.address.alignment = textAnchor;
+        //mainBg.phoneNum.alignment = textAnchor;
+        //mainBg.address.rectTransform.sizeDelta();
     }
     public static Dictionary<string, Dictionary<string, string>> ExplainString(string strLine)
     {
