@@ -76,6 +76,7 @@
     <Compile Include="Assets\SimpleColorPicker\Scripts\ColorSlider.cs" />
     <Compile Include="Assets\SimpleColorPicker\Scripts\PaletteGradient.cs" />
     <Compile Include="Assets\SimpleColorPicker\Scripts\RainbowGenerator.cs" />
+    <None Include="Assets\StreamingAssets\门诊信息.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/GitHubProject/PosterTool/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

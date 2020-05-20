@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using UnityEngine;
 using UnityEngine.UI;
@@ -128,27 +129,51 @@ public class PosterTools : MonoBehaviour
         }
     }
     //生成海报
-    IEnumerator CreatePosters() {
-        foreach (var item in PostersManager.GetInstance().outpatientInfoList)
+    IEnumerator CreatePosters()
+    {
+        if (PostersManager.GetInstance().type == 1)
         {
-            string logoPath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/Logo/";
-            string QrCodePath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/二维码/";
-            SetImage(logoPath, logo, item.logoPos.x, item.logoPos.y,item.logoSize.x,item.logoSize.y);
-            SetImage(QrCodePath, qRCode);
-            address.text = ( item.phoneNum+"|"+item.address).Replace('|', '\n');
-            //phoneNum.text = item.phoneNum==""?"": ;
-
-            if (PostersManager.GetInstance().theCurrentFestival =="营销海报")
+            var a = PostersManager.GetInstance().outpatientInfoList.FirstOrDefault(t => t.name == PostersManager.GetInstance().theCurrentOpcName);
+            if (a == null)
             {
-                content.text = item.content.Replace('|', '\n');
+                Debug.Log("指定门诊不存在！");
+                yield return null;
             }
-            ScreenShot(item.name);
-            yield return new WaitUntil(() => true);
+            else
+            {
+                StartScreenShot(a);
+                Debug.Log("结束！");
+               
+            }
         }
-        Debug.Log("结束！");
-        operationView.gameObject.SetActive(true);
+        else
+        {
+            foreach (var item in PostersManager.GetInstance().outpatientInfoList)
+            {
+                StartScreenShot(item);
+                yield return new WaitUntil(() => true);
+            }
+            Debug.Log("结束！");
+            operationView.gameObject.SetActive(true);
+        }
     }
-    
+
+    private void StartScreenShot(OutpatientInfo item)
+    {
+        string logoPath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/Logo/";
+        string QrCodePath = Application.streamingAssetsPath + "/门诊信息/" + item.name + "/二维码/";
+        SetImage(logoPath, logo, item.logoPos.x, item.logoPos.y, item.logoSize.x, item.logoSize.y);
+        SetImage(QrCodePath, qRCode);
+        address.text = (item.phoneNum + "|" + item.address).Replace('|', '\n');
+        //phoneNum.text = item.phoneNum==""?"": ;
+
+        if (PostersManager.GetInstance().theCurrentFestival == "营销海报")
+        {
+            content.text = item.content.Replace('|', '\n');
+        }
+        ScreenShot(item.name);
+    }
+
     public void ScreenShot(string outpatientName)
     {
         System.DateTime now = System.DateTime.Now;
@@ -168,7 +193,11 @@ public class PosterTools : MonoBehaviour
         ScreenCapture.CaptureScreenshot(path, 5);
         yield return new WaitUntil(() => true);
         //yield return new WaitForSeconds(1);
-        Debug.Log(path.Split('/')[6]+"--海报生成成功！！");
+        Debug.Log(path.Split('/')[6] + "--海报生成成功！！");
+        if (PostersManager.GetInstance().type == 1)
+        {
+            operationView.gameObject.SetActive(true);
+        }
     }
 
 

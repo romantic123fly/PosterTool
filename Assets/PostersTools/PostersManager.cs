@@ -24,6 +24,8 @@ public class PostersManager : MonoBehaviour
         instance = this;
     }
     public string theCurrentFestival ="营销海报";
+    public int type =0;
+    public string theCurrentOpcName;
     private Color textColor = Color.black;
     private int textSize = 80;
     public List<OutpatientInfo> outpatientInfoList = new List<OutpatientInfo> ();
