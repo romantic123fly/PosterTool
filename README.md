@@ -102,7 +102,7 @@ public class DragUI : MonoBehaviour, IDragHandler
 
 
 5.文字颜色大小可通过色板设置
-这个功能本来想自己写一个获取色环的工具出来的，后来因为时间上的原因就用了网上现有的色板工具很方便，再二次开发一下加入了字体大小的设置下载路径:https://download.csdn.net/download/qq_37310110/12311575
+这个功能本来想自己写一个获取色环的工具出来的，后来因为时间上的原因就用了网上现有的色板工具很方便，再二次开发一下加入了字体大小的设置
 
 ![img](https://img-blog.csdnimg.cn/2020040716301896.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MzEwMTEw,size_16,color_FFFFFF,t_70)
 
