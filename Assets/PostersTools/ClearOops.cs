@@ -16,6 +16,7 @@ using UnityEngine;
 
 public class ClearOops : MonoBehaviour
 {
+
     private Thread CloseOops;         //新建一个子线程
     private bool ThreadRunning = true;//标识子线程中的循环是否继续进行
 
