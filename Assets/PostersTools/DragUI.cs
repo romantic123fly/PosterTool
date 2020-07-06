@@ -14,6 +14,7 @@ public class DragUI : MonoBehaviour, IDragHandler
 {
     public void OnDrag(PointerEventData eventData)
     {
+
         Vector2 position;
 
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.gameObject.GetComponent<RectTransform>(), eventData.position, Camera.main, out position))
