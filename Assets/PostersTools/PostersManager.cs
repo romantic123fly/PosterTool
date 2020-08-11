@@ -15,6 +15,7 @@ using UnityEngine.UI;
 
 public class PostersManager : MonoBehaviour
 {
+
     private static PostersManager instance;
     public static PostersManager GetInstance(){
         return instance;
